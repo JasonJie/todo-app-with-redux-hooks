@@ -2,6 +2,7 @@
 import React from 'react';
 import '../node_modules/todomvc-app-css/index.css';
 
+// TODO todo-app-css项目 https://github.com/tastejs/todomvc-app-template
 const App = () => (
   <div>
     <div className="todoapp">
