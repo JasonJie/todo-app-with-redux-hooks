@@ -1,11 +1,9 @@
-const initState = { count: 0 };
+const initState = { todo: [] };
 
 function counter(state = initState, action) {
     switch (action.type) {
-        case 'increase':
-            return Object.assign({}, state, { count: state.count + 1 });
-        case 'subtract':
-            return Object.assign({}, state, { count: state.count - 1 });
+        case 'addTodo': 
+            return Object.assign({}, state, state.todo.push(action.payload.todoItem));
         default: return state;
     }
 }
