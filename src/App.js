@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 
-import React from 'react';
-import '../node_modules/todomvc-app-css/index.css';
+import React from "react";
+import "../node_modules/todomvc-app-css/index.css";
 
-// TODO todo-app-css项目 https://github.com/tastejs/todomvc-app-template 
+// TODO todo-app-css项目 https://github.com/tastejs/todomvc-app-template
 const App = () => (
   <div>
     <div className="todoapp">
@@ -32,13 +32,10 @@ const App = () => (
             </div>
             <input className="edit" defaultValue="Create a TodoMVC template" />
           </li>
-
-
         </ul>
       </div>
     </div>
   </div>
-    );
-
+);
 
 export default App;
