@@ -6,6 +6,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1",
+    "redux-starter-kit": "^0.5.1",
     "todomvc-app-css": "^2.2.0"
   },
   "scripts": {
