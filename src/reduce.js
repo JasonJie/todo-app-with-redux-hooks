@@ -1,17 +1,15 @@
 const initState = { todo: [] };
 
-function counter(state = initState, action) {
+function todoReduce(state = initState, action) {
   switch (action.type) {
-    case "addTodo":
-      return Object.assign(
-        {},
-        state,
-        state.todo.push(initTodo(action.payload.todoItem)),
-      );
+    case "addTodo": {
+      const { todo } = state;
+      todo.push(initTodo(action.payload.title));
+      return Object.assign({}, state, { ...state, todo });
+    }
     case "isChecked": {
       const newTodo = state.todo;
-      newTodo[action.payload.index].done = !state.todo[action.payload.index]
-        .done.checked;
+      newTodo[action.payload.index].done = !state.todo[action.payload.index].done.checked;
       return Object.assign({}, state, newTodo);
     }
     default:
@@ -19,13 +17,13 @@ function counter(state = initState, action) {
   }
 }
 
-const initTodo = (todoItem) => {
+const initTodo = (title) => {
   const _init = {
     title: "",
     done: false,
   };
-  _init.title = todoItem.title;
+  _init.title = title;
   return _init;
 };
 
-export default counter;
+export default todoReduce;

@@ -5,10 +5,10 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import counter from "./reduce";
+import todoReduce from "./reduce";
 import "../node_modules/todomvc-app-css/index.css";
 
-const store = createStore(counter);
+const store = createStore(todoReduce);
 
 ReactDOM.render(
   <Provider store={store}>

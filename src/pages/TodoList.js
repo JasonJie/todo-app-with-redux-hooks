@@ -4,7 +4,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 const TodoList = () => {
-  const todo = useSelector(state => state.todo);
+  const todo = useSelector(state => state.todo, () => {});
 
   return (
     <React.Fragment>
@@ -14,12 +14,14 @@ const TodoList = () => {
         <ul className="todo-list">
           {todo.map(item => (
             <React.Fragment>
-              <div className="view">
-                <input className="toggle" type="checkbox" />
-                <label>{item.title}</label>
-                <button className="destroy" type="button" />
-              </div>
-              <input className="edit" value="Rule the web" />
+              <li>
+                <div className="view">
+                  <input className="toggle" type="checkbox" />
+                  <label>{item.title}</label>
+                  <button className="destroy" type="button" />
+                </div>
+                <input className="edit" defaultValue="Rule the web" />
+              </li>
             </React.Fragment>
           ))}
         </ul>
