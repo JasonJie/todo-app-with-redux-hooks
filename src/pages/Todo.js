@@ -1,0 +1,11 @@
+import React from "react";
+import AddTodo from "./AddTodo";
+import TodoList from "./TodoList";
+
+const Todo = () => (
+  <div className="todoapp">
+    <AddTodo />
+    <TodoList />
+  </div>
+);
+export default Todo;
