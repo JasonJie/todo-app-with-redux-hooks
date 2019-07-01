@@ -4,7 +4,8 @@ let nextTodoId = 0;
 
 const addTodo = createAction("todos/add");
 const toggleTodo = createAction("todos/toggle");
-// const visibilityFilter = createAction("todos/visibilityFilter");
+const toggleAll = createAction("todos/toggleAll");
+const clearCompletedTodo = createAction("todos/clearCompletedTodo");
 
 const todosReducer = createReducer([], {
   [addTodo]: (state, action) => {
@@ -19,8 +20,15 @@ const todosReducer = createReducer([], {
     const index = action.payload;
     const todo = state[index];
     todo.completed = !todo.completed;
-    // return [...state.slice(0, index), todo, ...state.slice(index + 1)];
   },
+  [toggleAll]: (state, action) => {
+    const todos = state;
+    todos.forEach((item) => {
+      item.completed = action.payload.checked;
+    });
+    state = todos;
+  },
+  [clearCompletedTodo]: state => state.filter(item => item.completed === false),
 });
 
 export default todosReducer;

@@ -1,41 +1,61 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import TodoItem from "./TodoItem";
 
 const TodoList = () => {
+  const [allChecked, setAllChecked] = useState(false);
+  const visibilityFilter = useSelector(state => state.visibilityFilter);
   const todo = useSelector(state => state.todos);
+  const dispatch = useDispatch();
+  const toggleAll = () => {
+    dispatch({
+      type: "todos/toggleAll",
+      payload: {
+        checked: !isAllChecked(),
+      },
+    });
+    setAllChecked(!allChecked);
+  };
+  const isAllChecked = () => todo.every(item => item.completed === true);
+  const [mTodo, setMTodo] = useState([]);
+  useEffect(() => {
+    switch (visibilityFilter) {
+      case "SHOW_ALL":
+        setMTodo(todo);
+        break;
+      case "ACTIVE":
+        setMTodo(todo.filter(item => item.completed === false));
+        break;
+      case "COMPLETED":
+        setMTodo(todo.filter(item => item.completed === true));
+        break;
+      default:
+        setMTodo(todo);
+    }
+  }, [todo, visibilityFilter]);
 
   return (
     <React.Fragment>
       <div className="main">
-        <input id="toggle-all" className="toggle-all" type="checkbox" />
-        <label htmlFor="toggle-all">Mark all as complete</label>
+        {todo.length > 0 ? (
+          <React.Fragment>
+            <input
+              id="toggle-all"
+              className="toggle-all"
+              type="checkbox"
+              onChange={toggleAll}
+              checked={isAllChecked()} />
+            <label htmlFor="toggle-all">Mark all as complete</label>
+          </React.Fragment>
+        ) : null}
+
         <ul className="todo-list">
-          {todo.map(item => (
-            <TodoItem item={item} key={item.id} />
+          {mTodo.map((item, index) => (
+            <TodoItem item={item} key={item.id} itemIndex={index} />
           ))}
         </ul>
-        {/* <ul className="todo-list">
-          <li>
-            <div className="view">
-              <input className="toggle" type="checkbox" />
-              <label>Buy a unicorn</label>
-              <button className="destroy" type="button" />
-            </div>
-            <input className="edit" value="Rule the web" />
-          </li>
-
-          <li className="completed">
-            <div className="view">
-              <input className="toggle" type="checkbox" defaultChecked />
-              <label>Taste JavaScript</label>
-              <button className="destroy" type="button" />
-            </div>
-            <input className="edit" defaultValue="Create a TodoMVC template" />
-          </li>
-        </ul> */}
       </div>
     </React.Fragment>
   );

@@ -5,11 +5,11 @@ import { useDispatch } from "react-redux";
 
 const TodoItem = (props) => {
   const dispatch = useDispatch();
-  const { item } = props;
+  const { item, itemIndex } = props;
   const toggleTodoItem = () => {
     dispatch({
       type: "todos/toggle",
-      payload: item.id - 1,
+      payload: itemIndex,
     });
   };
   return (
@@ -19,8 +19,8 @@ const TodoItem = (props) => {
           <input
             className="toggle"
             type="checkbox"
-            defaultChecked={item.completed}
-            onClick={toggleTodoItem} />
+            checked={item.completed}
+            onChange={toggleTodoItem} />
           <label>{item.text}</label>
           <button className="destroy" type="button" />
         </div>
@@ -31,14 +31,16 @@ const TodoItem = (props) => {
 };
 TodoItem.propTypes = {
   item: PropTypes.shape({
-    text: PropTypes.string.isRequired,
+    text: PropTypes.string,
   }),
+  itemIndex: PropTypes.number,
 };
 
 TodoItem.defaultProps = {
   item: {
     text: "",
   },
+  itemIndex: 0,
 };
 
 export default TodoItem;
