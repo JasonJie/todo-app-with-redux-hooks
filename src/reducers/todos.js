@@ -19,7 +19,7 @@ const todosReducer = createReducer([], {
     const index = action.payload;
     const todo = state[index];
     todo.completed = !todo.completed;
-    return [...state.slice(0, index), todo, ...state.slice(index + 1)];
+    // return [...state.slice(0, index), todo, ...state.slice(index + 1)];
   },
 });
 
